@@ -47,7 +47,7 @@ df = pd.read_sql("SELECT * FROM transactions", conn)
 
 if df.empty:
     st.warning("No transactions added yet.")
-    st.stop()
+    
 
 # Convert Date column
 df["Date"] = pd.to_datetime(df["Date"], format="mixed")
