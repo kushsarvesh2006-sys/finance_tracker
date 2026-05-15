@@ -152,48 +152,46 @@ st.pyplot(fig2)
 if page == "Add Transaction":
     st.subheader("Add New Transaction")
 
-date = st.date_input("Select Date")
+    date = st.date_input("Select Date")
 
-category = st.selectbox(
-    "Category",
-    ["Food", "Travel", "Shopping", "Bills"]
-)
-
-amount = st.number_input(
-    "Amount",
-    min_value=0
-)
-
-payment = st.selectbox(
-    "Payment Mode",
-    ["UPI", "Cash", "Card"]
-)
-
-transaction_type = st.selectbox(
-    "Type",
-    ["Expense", "Income"]
-)
-
-if st.button("Add Transaction"):
-
-    new_data = pd.DataFrame({
-        "Date": [str(date)],
-        "Category": [category],
-        "Amount": [amount],
-        "Payment_Mode": [payment],
-        "Type":[transaction_type]
-    })
-    
-
-    new_data.to_sql(
-        "transactions",
-        conn,
-        if_exists="append",
-        index=False
+    category = st.selectbox(
+        "Category",
+        ["Food", "Travel", "Shopping", "Bills"]
     )
 
-    st.success("Transaction Added Successfully!")
+    amount = st.number_input(
+        "Amount",
+        min_value=0
+    )
 
+    payment = st.selectbox(
+        "Payment Mode",
+        ["UPI", "Cash", "Card"]
+    )
+
+    transaction_type = st.selectbox(
+        "Type",
+        ["Expense", "Income"]
+    )
+
+    if st.button("Add Transaction"):
+
+        new_data = pd.DataFrame({
+            "Date": [str(date)],
+            "Category": [category],
+            "Amount": [amount],
+            "Payment_Mode": [payment],
+            "Type": [transaction_type]
+        })
+
+        new_data.to_sql(
+            "transactions",
+            conn,
+            if_exists="append",
+            index=False
+        )
+
+        st.success("Transaction Added Successfully!")
  # Download Excel Report
 
 excel_data = df.to_csv(index=False).encode('utf-8')
