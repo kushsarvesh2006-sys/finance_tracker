@@ -49,21 +49,22 @@ if df.empty:
     st.warning("No transactions added yet.")
     
 
-# Convert Date column
-df["Date"] = pd.to_datetime(df["Date"], format="mixed")
+if not df.empty:
 
-# Create Month column
-df["Month"] = df["Date"].dt.month_name()
+    # Convert Date column
+    df["Date"] = pd.to_datetime(df["Date"], format="mixed")
 
-# Month Selection
+    # Create Month column
+    df["Month"] = df["Date"].dt.month_name()
 
-selected_month = st.selectbox(
-    "Select Month",
-    df["Month"].unique()
-)
+    # Month Selection
+    selected_month = st.selectbox(
+        "Select Month",
+        df["Month"].unique()
+    )
 
-# Filter data by month
-df = df[df["Month"] == selected_month]
+    # Filter data by month
+    df = df[df["Month"] == selected_month]
 
 
 # Show table
