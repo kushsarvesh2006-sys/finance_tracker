@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 import matplotlib.pyplot as plt
+import os
 
 st.set_page_config(
     page_title="Finance Tracker",
@@ -19,11 +20,34 @@ page = st.sidebar.radio(
     ["Dashboard", "Add Transaction"]
 )
 
+# Create database folder if not exists
+if not os.path.exists("../database"):
+    os.makedirs("../database")
+
 # Database connection
 conn = sqlite3.connect("../database/finance.db")
 
+# Create table if not exists
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS transactions (
+    Date TEXT,
+    Category TEXT,
+    Amount REAL,
+    Payment_Mode TEXT,
+    Type TEXT
+)
+""")
+
+conn.commit()
+
 # Read data
 df = pd.read_sql("SELECT * FROM transactions", conn)
+
+if df.empty:
+    st.warning("No transactions added yet.")
+    st.stop()
 
 # Convert Date column
 df["Date"] = pd.to_datetime(df["Date"], format="mixed")
