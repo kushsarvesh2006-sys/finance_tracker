@@ -155,3 +155,30 @@ if page == "Dashboard":
             st.success("Transaction Deleted Successfully!")
 
             st.rerun()
+
+        st.subheader("Edit Transaction")
+
+        edit_index = st.selectbox(
+            "Select Transaction To Edit",
+            df.index,
+            key="edit_select"
+        )
+
+        updated_amount = st.number_input(
+            "Updated Amount",
+            min_value=0,
+            key="updated_amount"
+        )
+
+        if st.button("Update Transaction"):
+
+            conn.execute(
+                "UPDATE transactions SET Amount = ? WHERE rowid = ?",
+                (updated_amount, edit_index + 1)
+            )
+
+            conn.commit()
+
+            st.success("Transaction Updated Successfully!")
+
+            st.rerun()
