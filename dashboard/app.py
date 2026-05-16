@@ -120,3 +120,23 @@ if page == "Dashboard":
         st.subheader("Category Wise Expense")
 
         st.bar_chart(category_expense)
+
+        st.subheader("Delete Transaction")
+
+        transaction_index = st.selectbox(
+            "Select Transaction Index",
+            df.index
+        )
+
+        if st.button("Delete Transaction"):
+
+            conn.execute(
+                "DELETE FROM transactions WHERE rowid = ?",
+                (transaction_index + 1,)
+            )
+
+            conn.commit()
+
+            st.success("Transaction Deleted Successfully!")
+
+            st.rerun()
