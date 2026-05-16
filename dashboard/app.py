@@ -94,7 +94,6 @@ if page == "Dashboard":
         st.warning("No transactions added yet.")
 
     else:
-        
 
         df["Date"] = pd.to_datetime(df["Date"])
 
@@ -106,9 +105,10 @@ if page == "Dashboard":
         )
 
         df = df[df["Month"] == selected_month]
-        
+
         st.dataframe(df)
 
+        
         income = df[df["Type"] == "Income"]["Amount"].sum()
 
         expense = df[df["Type"] == "Expense"]["Amount"].sum()
