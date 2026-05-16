@@ -8,28 +8,41 @@ st.set_page_config(
     page_icon="💰",
     layout="wide"
 )
-st.markdown("""
+st.markdown(
+    """
     <style>
     .stApp {
         background-color: #0E1117;
-        color: white;
     }
 
     section[data-testid="stSidebar"] {
         background-color: #161B22;
     }
 
+    h1, h2, h3, h4, h5, h6, p, label, div {
+        color: white;
+    }
+
     div.stButton > button {
         background-color: #238636;
         color: white;
         border-radius: 10px;
+        border: none;
     }
 
     div.stButton > button:hover {
         background-color: #2EA043;
     }
+
+    div[data-testid="metric-container"] {
+        background-color: #161B22;
+        border-radius: 12px;
+        padding: 10px;
+    }
     </style>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
 st.title("Personal Finance Tracker")
 
