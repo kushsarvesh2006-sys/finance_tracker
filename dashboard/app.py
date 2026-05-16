@@ -95,7 +95,7 @@ if page == "Dashboard":
 
     else:
 
-        df["Date"] = pd.to_datetime(df["Date"])
+        df["Date"] = pd.to_datetime(df["Date"],errors="coerce")
 
         df["Month"] = df["Date"].dt.month_name()
 
@@ -108,7 +108,7 @@ if page == "Dashboard":
 
         st.dataframe(df)
 
-        
+
         income = df[df["Type"] == "Income"]["Amount"].sum()
 
         expense = df[df["Type"] == "Expense"]["Amount"].sum()
