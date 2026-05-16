@@ -113,3 +113,10 @@ if page == "Dashboard":
 
         with col3:
             st.metric("Total Savings", f"₹{savings}")
+
+        # Category Expense
+        category_expense = df.groupby("Category")["Amount"].sum()
+
+        st.subheader("Category Wise Expense")
+
+        st.bar_chart(category_expense)
