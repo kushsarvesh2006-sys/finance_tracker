@@ -8,6 +8,28 @@ st.set_page_config(
     page_icon="💰",
     layout="wide"
 )
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #0E1117;
+        color: white;
+    }
+
+    section[data-testid="stSidebar"] {
+        background-color: #161B22;
+    }
+
+    div.stButton > button {
+        background-color: #238636;
+        color: white;
+        border-radius: 10px;
+    }
+
+    div.stButton > button:hover {
+        background-color: #2EA043;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 st.title("Personal Finance Tracker")
 
