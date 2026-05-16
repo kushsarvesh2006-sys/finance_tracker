@@ -121,6 +121,21 @@ if page == "Dashboard":
 
         st.bar_chart(category_expense)
 
+        st.subheader("Expense Distribution")
+
+        pie_data = df[df["Type"] == "Expense"]
+
+        if not pie_data.empty:
+
+            pie_chart = pie_data.groupby("Category")["Amount"].sum()
+
+            st.pyplot(
+                pie_chart.plot.pie(
+                    autopct="%1.1f%%",
+                    figsize=(5, 5)
+                ).figure
+            )
+
         st.subheader("Delete Transaction")
 
         transaction_index = st.selectbox(
