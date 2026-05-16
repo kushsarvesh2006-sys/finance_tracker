@@ -107,6 +107,14 @@ if page == "Dashboard":
 
         df = df[df["Month"] == selected_month]
 
+        selected_category = st.selectbox(
+            "Select Category",
+            ["All"] + list(df["Category"].unique())
+        )
+
+        if selected_category != "All":
+            df = df[df["Category"] == selected_category]
+
         st.dataframe(df)
 
 
