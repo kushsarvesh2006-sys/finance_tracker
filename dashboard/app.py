@@ -94,7 +94,19 @@ if page == "Dashboard":
         st.warning("No transactions added yet.")
 
     else:
+        
 
+        df["Date"] = pd.to_datetime(df["Date"])
+
+        df["Month"] = df["Date"].dt.month_name()
+
+        selected_month = st.selectbox(
+            "Select Month",
+            df["Month"].unique()
+        )
+
+        df = df[df["Month"] == selected_month]
+        
         st.dataframe(df)
 
         income = df[df["Type"] == "Income"]["Amount"].sum()
