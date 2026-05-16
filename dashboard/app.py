@@ -140,6 +140,8 @@ if page == "Dashboard":
 
         st.write(f"Progress: {progress:.0%}")
 
+        
+
         # Category Expense
         category_expense = df.groupby("Category")["Amount"].sum()
 
