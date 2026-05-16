@@ -126,6 +126,20 @@ if page == "Dashboard":
         with col3:
             st.metric("Total Savings", f"₹{savings}")
 
+        st.subheader("Savings Goal Progress")
+
+        savings_goal = 50000
+
+        progress = savings / savings_goal
+
+        st.progress(min(progress, 1.0))
+
+        st.write(f"Goal: ₹{savings_goal}")
+
+        st.write(f"Current Savings: ₹{savings}")
+
+        st.write(f"Progress: {progress:.0%}")
+
         # Category Expense
         category_expense = df.groupby("Category")["Amount"].sum()
 
