@@ -82,7 +82,7 @@ if page == "Add Transaction":
             if_exists="append",
             index=False
         )
-
+        conn.commit()
         st.success("Transaction Added Successfully!")
 
 # ---------------- DASHBOARD ----------------
@@ -105,12 +105,18 @@ if page == "Dashboard":
             df["Month"].unique()
         )
 
-        df = df[df["Month"] == selected_month]
         df=df.dropna(subset=["Month"])
+        df = df[df["Month"] == selected_month]
+        
+
+        category_list = ["All"]
+
+        if not df.empty:
+            category_list += list(df["Category"].dropna().unique())
 
         selected_category = st.selectbox(
             "Select Category",
-            ["All"] + list(df["Category"].unique())
+            category_list
         )
 
         if selected_category != "All":
