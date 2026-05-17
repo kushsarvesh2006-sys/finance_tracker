@@ -178,7 +178,7 @@ if page == "Dashboard":
             st.pyplot(
                 pie_chart.plot.pie(
                     autopct="%1.1f%%",
-                    figsize=(3, 3)
+                    figsize=(2.5, 2.5)
                 ).figure
             )
 
