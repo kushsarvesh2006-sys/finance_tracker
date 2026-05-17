@@ -139,7 +139,7 @@ if page == "Dashboard":
 
         savings_goal = 50000
 
-        progress = savings / savings_goal
+        progress = max(0,savings / savings_goal)
 
         st.progress(min(progress, 1.0))
 
