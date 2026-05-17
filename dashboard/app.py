@@ -84,6 +84,7 @@ if page == "Add Transaction":
         )
         conn.commit()
         st.success("Transaction Added Successfully!")
+        st.rerun()
 
 # ---------------- DASHBOARD ----------------
 
@@ -107,7 +108,7 @@ if page == "Dashboard":
             "Select Month",
             month_list
         )
-        
+
         df = df[df["Month"] == selected_month]
         
 
