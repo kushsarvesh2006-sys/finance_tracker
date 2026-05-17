@@ -106,6 +106,7 @@ if page == "Dashboard":
         )
 
         df = df[df["Month"] == selected_month]
+        df=df.dropna(subset=["Month"])
 
         selected_category = st.selectbox(
             "Select Category",
@@ -156,7 +157,15 @@ if page == "Dashboard":
 
         st.subheader("Category Wise Expense")
 
-        st.bar_chart(category_expense)
+        chart_data = category_expense.reset_index()
+
+        chart_data.columns = ["Category", "Amount"]
+
+        st.bar_chart(
+            data=chart_data,
+            x="Category",
+            y="Amount"
+        )
 
         st.subheader("Expense Distribution")
 
