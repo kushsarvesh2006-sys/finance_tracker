@@ -97,15 +97,17 @@ if page == "Dashboard":
     else:
 
         df["Date"] = pd.to_datetime(df["Date"],errors="coerce")
-
         df["Month"] = df["Date"].dt.month_name()
+
+        df = df.dropna(subset=["Month"])
+
+        month_list = list(df["Month"].unique())
 
         selected_month = st.selectbox(
             "Select Month",
-            df["Month"].unique()
+            month_list
         )
-
-        df=df.dropna(subset=["Month"])
+        
         df = df[df["Month"] == selected_month]
         
 
