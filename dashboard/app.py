@@ -124,7 +124,7 @@ if page == "Dashboard":
             (df["Date"]<=
         pd.to_datetime(end_date))
         ]
-        
+
         category_list = ["All"]
 
         if not df.empty:
@@ -206,7 +206,21 @@ if page == "Dashboard":
 
         st.line_chart(monthly_expense)
 
+        st.subheader("Smart Insights")
+        highest_category = category_expense.idxmax()
+        highest_amount = category_expense.max()
+        st.info(
+            f"Highest spending is on {highest_category} (₹{highest_amount})"
+        )
+        st.success(
+            f"Total Transactions: {len(df)}"
+        )
+        if savings > 0:
+            st.success("You are saving money this month 🎉")
+        else:
+            st.warning("Your expenses are higher than income ⚠️")
         st.subheader("Expense Distribution")
+
 
         pie_data = df[df["Type"] == "Expense"]
 
