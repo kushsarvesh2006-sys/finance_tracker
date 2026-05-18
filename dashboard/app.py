@@ -183,6 +183,13 @@ if page == "Dashboard":
             x="Category",
             y="Amount"
         )
+        st.subheader("Monthly Expense Trend")
+
+        monthly_expense = df[df["Type"] == "Expense"]
+
+        monthly_expense = monthly_expense.groupby("Date")["Amount"].sum()
+
+        st.line_chart(monthly_expense)
 
         st.subheader("Expense Distribution")
 
