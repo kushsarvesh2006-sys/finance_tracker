@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS transactions (
     Category TEXT,
     Amount REAL,
     Payment_Mode TEXT,
-    Type TEXT
+    Type TEXT,
+    Notes TEXT              
 )
 """)
 
@@ -65,6 +66,7 @@ if page == "Add Transaction":
         "Type",
         ["Expense", "Income"]
     )
+    notes = st.text_input("Notes")
 
     if st.button("Add Transaction"):
 
@@ -73,7 +75,8 @@ if page == "Add Transaction":
             "Category": [category],
             "Amount": [amount],
             "Payment_Mode": [payment],
-            "Type": [transaction_type]
+            "Type": [transaction_type],
+            "Notes": [notes]
         })
 
         new_data.to_sql(
