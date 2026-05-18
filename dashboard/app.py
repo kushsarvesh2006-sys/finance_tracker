@@ -126,6 +126,14 @@ if page == "Dashboard":
             df = df[df["Category"] == selected_category]
 
         st.dataframe(df)
+        csv = df.to_csv(index=False).encode("utf-8")
+
+        st.download_button(
+            label="Download Report CSV",
+            data=csv,
+            file_name="finance_report.csv",
+            mime="text/csv"
+        )
 
 
         income = df[df["Type"] == "Income"]["Amount"].sum()
