@@ -198,6 +198,15 @@ if page == "Dashboard":
         # Category Expense
         category_expense = df.groupby("Category")["Amount"].sum()
 
+        st.subheader("Category Summary")
+
+        category_totals = df.groupby("Category")["Amount"].sum()
+
+        cols = st.columns(len(category_totals))
+
+        for col, (cat, amt) in zip(cols, category_totals.items()):
+            col.metric(cat, f"₹{amt}")
+
         st.subheader("Category Wise Expense")
 
         chart_data = category_expense.reset_index()
