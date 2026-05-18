@@ -141,6 +141,14 @@ if page == "Dashboard":
         if selected_category != "All":
             df = df[df["Category"] == selected_category]
 
+        search = st.text_input("Search Transactions")
+
+        if search:
+            df = df[
+                df.astype(str)
+                .apply(lambda row: row.str.contains(search, case=False).any(), axis=1)
+            ]   
+
         st.dataframe(df)
         csv = df.to_csv(index=False).encode("utf-8")
 
