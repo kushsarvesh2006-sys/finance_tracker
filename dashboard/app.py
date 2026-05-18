@@ -110,8 +110,21 @@ if page == "Dashboard":
         )
 
         df = df[df["Month"] == selected_month]
+        start_date = st.date_input(
+            "Start Date",
+            df["Date"].min()
+        )
+        end_date = st.date_input(
+            "End Date",
+            df["Date"].max()
+        )
+        df = df[
+            (df["Date"]>=
+        pd.to_datetime(start_date)) &
+            (df["Date"]<=
+        pd.to_datetime(end_date))
+        ]
         
-
         category_list = ["All"]
 
         if not df.empty:
