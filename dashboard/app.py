@@ -154,11 +154,13 @@ if page == "Dashboard":
             st.metric("Total Savings", f"₹{savings}")
 
         st.subheader("Savings Goal Progress")
-
-        savings_goal = 50000
-
+        savings_goal = st.number_input(
+            "Set Saving Goal",
+            min_value=1000,
+            value=50000,
+            step=1000
+        )
         progress = max(0,savings / savings_goal)
-
         st.progress(min(progress, 1.0))
 
         st.write(f"Goal: ₹{savings_goal}")
